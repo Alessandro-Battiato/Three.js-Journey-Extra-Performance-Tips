@@ -4,6 +4,8 @@ import Stats from "stats.js";
 
 // start chrome --args --disable-gpu-vsync --disable-frame-rate-limit  this is windows command to disable chrome's fps limit
 
+// Three js lights are heavy and bad for performances, better to avoid them, and if necessary, it's preferred to use ambient lights, directional lights, hemisphere lights
+
 /**
  * Stats
  */
