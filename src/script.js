@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import Stats from "stats.js";
+import * as BufferGeometryUtils from "three/examples/jsm/utils/BufferGeometryUtils.js";
 
 // start chrome --args --disable-gpu-vsync --disable-frame-rate-limit  this is windows command to disable chrome's fps limit
 
@@ -199,22 +200,32 @@ tick();
 // renderer.shadowMap.autoUpdate = false
 // renderer.shadowMap.needsUpdate = true
 
-// // Tip 18
+// // Tip 18, better to merge geometries such as the following way as to reduce draw calls measured thanks to Spector.js
+// const geometries = [];
 // for(let i = 0; i < 50; i++)
 // {
-//     const geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5)
+//     const geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5); this geometry created inside this loop is extremely BAD for performances, create it outside of the loop
 
-//     const material = new THREE.MeshNormalMaterial()
+//     geometry.rotateX((Math.random() - 0.5) * Math.PI * 2)
+//     geometry.rotateY((Math.random() - 0.5) * Math.PI * 2)
 
-//     const mesh = new THREE.Mesh(geometry, material)
-//     mesh.position.x = (Math.random() - 0.5) * 10
-//     mesh.position.y = (Math.random() - 0.5) * 10
-//     mesh.position.z = (Math.random() - 0.5) * 10
-//     mesh.rotation.x = (Math.random() - 0.5) * Math.PI * 2
-//     mesh.rotation.y = (Math.random() - 0.5) * Math.PI * 2
+//     geometry.translate(
+//          (Math.random() - 0.5) * 10,
+//          (Math.random() - 0.5) * 10;
+//          (Math.random() - 0.5) * 10;
+//     )
+//     geometries.push(geometry);
 
 //     scene.add(mesh)
 // }
+
+// const mergedGeometry = BufferGeometryUtils.mergeGeometries(geometries);
+
+// const material = new THREE.MeshNormalMaterial()
+
+// const mesh = new THREE.Mesh(geometry, material)
+
+// scene.add(mesh)
 
 // // Tip 19
 // for(let i = 0; i < 50; i++)
