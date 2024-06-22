@@ -2,6 +2,8 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import Stats from "stats.js";
 
+// start chrome --args --disable-gpu-vsync --disable-frame-rate-limit  this is windows command to disable chrome's fps limit
+
 /**
  * Stats
  */
@@ -145,6 +147,8 @@ const tick = () => {
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick);
+
+    stats.end();
 };
 
 tick();
