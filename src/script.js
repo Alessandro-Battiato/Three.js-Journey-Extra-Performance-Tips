@@ -228,11 +228,11 @@ tick();
 // scene.add(mesh)
 
 // // Tip 19
-// for(let i = 0; i < 50; i++)
-// {
 //     const geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5)
 
-//     const material = new THREE.MeshNormalMaterial()
+//     const material = new THREE.MeshNormalMaterial(); the materials as well should be created outside of the loop
+// for(let i = 0; i < 50; i++)
+// {
 
 //     const mesh = new THREE.Mesh(geometry, material)
 //     mesh.position.x = (Math.random() - 0.5) * 10
@@ -266,14 +266,28 @@ tick();
 
 // const material = new THREE.MeshNormalMaterial()
 
+// const mesh = new THREE.InstancedMesh(geometry, material, 50); // 50 meshes
+// scene.add(mesh)
+
 // for(let i = 0; i < 50; i++)
 // {
-//     const mesh = new THREE.Mesh(geometry, material)
-//     mesh.position.x = (Math.random() - 0.5) * 10
-//     mesh.position.y = (Math.random() - 0.5) * 10
-//     mesh.position.z = (Math.random() - 0.5) * 10
-//     mesh.rotation.x = (Math.random() - 0.5) * Math.PI * 2
-//     mesh.rotation.y = (Math.random() - 0.5) * Math.PI * 2
+//     const position = new THREE.Vector3(
+//         (Math.random() - 0.5) * 10,
+//         (Math.random() - 0.5) * 10,
+//         (Math.random() - 0.5) * 10
+//     )
+
+//     const quaternion = new THREE.Quaternion();
+//     quaternion.setFromEuler(new THREE.Euler(
+//       (Math.random() - 0.5) * Math.PI * 2,
+//       (Math.random() - 0.5) * Math.PI * 2,
+//       0
+//     ));
+
+//     const matrix = new THREE.Matrix4();
+//     matrix.makeRotationFromQuaternion(quaternion)
+//     matrix.setPosition(quaternion)
+//     mesh.setMatrixAt(i, matrix);
 
 //     scene.add(mesh)
 // }
