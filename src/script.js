@@ -304,6 +304,11 @@ const shaderMaterial = new THREE.ShaderMaterial({
         uDisplacementTexture: { value: displacementTexture },
         uDisplacementStrength: { value: 1.5 },
     },
+    defines: {
+        DISPLACEMENT_STRENGTH: 1.5, // you provide them but you DON'T change them afterwards or it's bad for performances
+    },
+    // It's also best to calculate color inside the vertex shader whenever possible, best to delegate things to vertex shader
+    // as calculating stuff inside the fragment shader is way heavier for performances
     vertexShader: `
         uniform sampler2D uDisplacementTexture;
         uniform float uDisplacementStrength;
@@ -315,10 +320,7 @@ const shaderMaterial = new THREE.ShaderMaterial({
             vec4 modelPosition = modelMatrix * vec4(position, 1.0);
 
             float elevation = texture2D(uDisplacementTexture, uv).r;
-            if(elevation < 0.5)
-            {
-                elevation = 0.5;
-            }
+            elevation = max(elevation, 0.25);
 
             modelPosition.y += elevation * uDisplacementStrength;
 
