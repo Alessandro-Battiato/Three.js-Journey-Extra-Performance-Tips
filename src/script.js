@@ -6,6 +6,10 @@ import Stats from "stats.js";
 
 // Three js lights are heavy and bad for performances, better to avoid them, and if necessary, it's preferred to use ambient lights, directional lights, hemisphere lights
 
+// Same for the lights, shadows are bad for performances, and actually for both lights and shadows we can used the baked versions of them as a compromise
+
+// Cast and receive shadows should used only when said objects can cast ( or receive ) shadows, otherwise it's bad for performances
+
 /**
  * Stats
  */
